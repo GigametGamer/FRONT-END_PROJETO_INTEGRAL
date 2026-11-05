@@ -1,0 +1,55 @@
+body{
+    background-color: aliceblue;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.login-container {
+    background-color: #dacbcb;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.dados-container {
+    position: relative;
+    margin-top: 30px;
+    background-color: #f0f0f0;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    height: 300px;
+    justify-content: center;
+}
+
+.email-container, .password-container {
+    padding: 10px;
+    height: 50px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: -50%;
+}
+
+.email-input, .password-input {
+    width: 80vw;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: -5%;
+}
+
+.email-label, .password-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-left: -5%;
+}
