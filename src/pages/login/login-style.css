@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+    --green-dark: #174d36;
+    --green: #26734d;
+    --green-light: #e8f3eb;
+    --text: #203329;
+    --muted: #718078;
+    --border: #dce6df;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'DM Sans', Arial, sans-serif;
+    color: var(--text);
+    background: #f4f8f4;
+}
+
+.login-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.brand-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px clamp(32px, 7vw, 100px);
+    overflow: hidden;
+    color: var(--white);
+    background:
+        radial-gradient(circle at 85% 15%, rgba(173, 218, 166, 0.22), transparent 28%),
+        radial-gradient(circle at 15% 85%, rgba(120, 180, 129, 0.2), transparent 30%),
+        linear-gradient(145deg, #123d2c, #26734d);
+}
+
+.brand-panel::after {
+    content: '';
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    right: -130px;
+    bottom: 8%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    box-shadow: 0 0 0 35px rgba(255, 255, 255, 0.035), 0 0 0 70px rgba(255, 255, 255, 0.025);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    color: var(--white);
+    font-family: 'Manrope', sans-serif;
+    font-size: 27px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.brand-icon {
+    font-size: 30px;
+}
+
+.brand-highlight {
+    color: #b9e2bd;
+}
+
+.brand-message {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: auto 0;
+    padding: 70px 0;
+}
+
+.eyebrow,
+.form-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.eyebrow {
+    color: #c3e5c8;
+}
+
+.brand-message h1 {
+    max-width: 500px;
+    margin: 22px 0 18px;
+    font-family: 'Manrope', sans-serif;
+    font-size: clamp(38px, 4.3vw, 62px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+}
+
+.brand-message p {
+    max-width: 440px;
+    margin: 0;
+    color: #d6e8db;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.brand-footer {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    color: #c3dfca;
+    font-size: 13px;
+}
+
+.form-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 28px 24px;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 42px;
+    border: 1px solid #e8eee9;
+    border-radius: 18px;
+    background: var(--white);
+    box-shadow: 0 18px 55px rgba(28, 65, 43, 0.08);
+}
+
+.mobile-brand {
+    display: none;
+    margin-bottom: 30px;
+    color: var(--green-dark);
+    font-family: 'Manrope', sans-serif;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.form-eyebrow {
+    color: var(--green);
+}
+
+.form-card h2 {
+    margin: 12px 0 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 29px;
+    letter-spacing: -0.8px;
+}
+
+.form-description {
+    margin: 0 0 30px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.form-group {
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.form-group input {
+    width: 100%;
+    min-height: 49px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+    background: #fbfdfb;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #a3afa7;
+}
+
+.form-group input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(38, 115, 77, 0.12);
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 82px;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    padding: 6px;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: var(--green);
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.submit-button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 5px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--green-dark);
+    color: var(--white);
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.submit-button:hover {
+    transform: translateY(-1px);
+    background: var(--green);
+}
+
+.signup-text {
+    margin: 25px 0 0;
+    color: var(--muted);
+    text-align: center;
+    font-size: 13px;
+}
+
+.signup-text a {
+    color: var(--green);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin: 25px 0 0;
+    color: #89968d;
+    text-align: center;
+    font-size: 11px;
+}
+
+@media (max-width: 800px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+
+    .brand-panel {
+        min-height: 250px;
+        padding: 28px;
+    }
+
+    .brand-message {
+        padding: 45px 0 20px;
+    }
+
+    .brand-message h1 {
+        max-width: 430px;
+        font-size: 38px;
+    }
+
+    .brand-message p {
+        font-size: 14px;
+    }
+
+    .brand-footer {
+        display: none;
+    }
+
+    .form-panel {
+        padding: 35px 18px 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-panel {
+        min-height: 220px;
+    }
+
+    .brand {
+        font-size: 23px;
+    }
+
+    .brand-message {
+        padding: 35px 0 10px;
+    }
+
+    .brand-message h1 {
+        font-size: 32px;
+    }
+
+    .brand-message p {
+        line-height: 1.6;
+    }
+
+    .form-card {
+        padding: 28px 22px;
+    }
+
+    .mobile-brand {
+        display: block;
+    }
+
+    .form-card h2 {
+        font-size: 25px;
+    }
+}
