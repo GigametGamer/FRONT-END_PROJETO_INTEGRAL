@@ -1,31 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Login</title>
-    <link rel="stylesheet" href="../pages-style.css">
+    <meta name="theme-color" content="#174d36">
+    <title>Entrar | BioStore</title>
+    <link rel="stylesheet" href="login-style.css">
+    <script src="login.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="login-container">
-            <h1>Login</h1>
-        </div>
-    </header>
-    <main>
-        <div class="dados-container">
-            <form action="/login" method="POST">
-                <div class="email-container">
-                <label for="email" class="email-label">Email:</label>
-                    <input type="email" id="email" name="email" class="email-input" required>
+    <main class="login-page">
+        <section class="brand-panel" aria-label="Apresentação da BioStore">
+            <a class="brand" href="../home/home.html" aria-label="BioStore - página inicial">
+                <span class="brand-icon" aria-hidden="true">🌿</span>
+                <span>Bio<span class="brand-highlight">Store</span></span>
+            </a>
+
+            <div class="brand-message">
+                <span class="eyebrow">CIÊNCIA • NATUREZA • DESCOBERTA</span>
+                <h1>Explore a vida em cada detalhe.</h1>
+                <p>Encontre materiais de Biologia, terrários e culturas para transformar sua curiosidade em descoberta.</p>
+            </div>
+
+            <p class="brand-footer">Cultive conhecimento. Descubra possibilidades.</p>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-card">
+                <div class="mobile-brand">
+                    <span aria-hidden="true">🌿</span> BioStore
                 </div>
-                <div class="password-container">
-                    <label for="password" class="password-label ">Senha:</label>
-                    <input type="password" id="password" name="password" class="password-input" required>
-                </div>
-                <button type="submit" class="">Entrar</button>
-            </form>
-        </div>
+
+                <span class="form-eyebrow">BEM-VINDO DE VOLTA</span>
+                <h2>Entre na sua conta</h2>
+                <p class="form-description">Acesse sua conta para continuar explorando a BioStore.</p>
+
+                <form id="loginForm" action="/login" method="POST">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@exemplo.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-field">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button class="toggle-password" id="togglePassword" type="button" aria-label="Mostrar senha" aria-pressed="false">
+                                Mostrar
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="submit-button" type="submit">Entrar na BioStore</button>
+                </form>
+
+                <p class="signup-text">Ainda não tem uma conta? <a href="../../formularios/form.html">Cadastre-se</a></p>
+            </div>
+            <p class="copyright">© 2026 BioStore • Conhecimento que floresce.</p>
+        </section>
     </main>
 </body>
-</html> 
+</html>
