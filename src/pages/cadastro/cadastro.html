@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174d36">
+    <title>Criar conta | BioStore</title>
+    <link rel="stylesheet" href="cadastro-style.css">
+    <script src="cadastro.js" defer></script>
+</head>
+<body>
+    <main class="register-page">
+        <section class="brand-panel" aria-label="Apresentação da BioStore">
+            <a class="brand" href="../home/home.html" aria-label="BioStore - página inicial">
+                <span class="brand-icon" aria-hidden="true">🌿</span>
+                <span>Bio<span class="brand-highlight">Store</span></span>
+            </a>
+            <div class="brand-message">
+                <span class="eyebrow">CIÊNCIA • NATUREZA • DESCOBERTA</span>
+                <h1>Comece sua jornada de descobertas.</h1>
+                <p>Crie sua conta e explore materiais de Biologia, terrários e culturas em um só lugar.</p>
+            </div>
+            <p class="brand-footer">Cultive conhecimento. Descubra possibilidades.</p>
+        </section>
+
+        <section class="form-panel">
+            <div class="form-card">
+                <div class="mobile-brand"><span aria-hidden="true">🌿</span> BioStore</div>
+                <span class="form-eyebrow">FAÇA PARTE DA BIOSTORE</span>
+                <h2>Crie sua conta</h2>
+                <p class="form-description">Preencha seus dados para começar a explorar.</p>
+
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Nome completo</label>
+                        <input type="text" id="name" name="name" placeholder="Digite seu nome" autocomplete="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-field">
+                            <input type="password" id="password" name="password" placeholder="Crie uma senha" autocomplete="new-password" minlength="8" required>
+                            <button class="toggle-password" id="togglePassword" type="button" aria-label="Mostrar senha" aria-pressed="false">Mostrar</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar senha</label>
+                        <div class="password-field">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Digite a senha novamente" autocomplete="new-password" minlength="8" required>
+                            <button class="toggle-password" id="toggleConfirmPassword" type="button" aria-label="Mostrar confirmação de senha" aria-pressed="false">Mostrar</button>
+                        </div>
+                    </div>
+                    <p class="form-error" id="formError" role="alert" aria-live="polite"></p>
+                    <button class="submit-button" type="submit">Criar minha conta</button>
+                </form>
+                <p class="signup-text">Já tem uma conta? <a href="../login/login.html">Entrar</a></p>
+            </div>
+            <p class="copyright">© 2026 BioStore • Conhecimento que floresce.</p>
+        </section>
+    </main>
+</body>
+</html>
