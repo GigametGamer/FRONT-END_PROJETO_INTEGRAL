@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
-
+ 
 :root {
     --green-dark: #174d36;
     --green: #26734d;
@@ -82,8 +82,7 @@ body {
     padding: 70px 0;
 }
 
-.eyebrow,
-.form-eyebrow {
+.eyebrow, .form-eyebrow {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
