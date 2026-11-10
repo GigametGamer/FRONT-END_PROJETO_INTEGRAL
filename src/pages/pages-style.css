@@ -695,3 +695,203 @@ html { scroll-behavior: smooth; }
 @media (max-width: 480px) {
     .cart-items-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
 }
+
+
+/* Correção do cabeçalho da Home: restaura o layout que foi removido */
+.home-page,
+.home-page * {
+    box-sizing: border-box;
+}
+
+.home-page {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: #f7faf6;
+    color: #203b2c;
+}
+
+.home-header {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    width: 100%;
+    min-height: 82px;
+    padding: 0 clamp(22px, 7vw, 112px);
+    background: #fff;
+    border-bottom: 1px solid #e8efe8;
+}
+
+.home-header .home-brand {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 9px;
+    color: #174d36;
+    font-family: 'Manrope', sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.home-header .home-brand > span:last-child > span {
+    color: #70a77a;
+}
+
+.home-header .home-brand-icon {
+    display: inline-block;
+    color: #70a77a;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.home-header .home-nav {
+    position: static;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(18px, 2.5vw, 36px);
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.home-header .home-nav a {
+    display: inline-block;
+    padding: 8px 0;
+    color: #68796d;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s;
+}
+
+.home-header .home-nav a:hover,
+.home-header .home-nav a.active {
+    color: #26734d;
+}
+
+.home-header .home-cart {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid #dce9dd;
+    border-radius: 9px;
+    background: #fff;
+    color: #24583a;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background .2s, border-color .2s;
+}
+
+.home-header .home-cart:hover {
+    background: #eef6ee;
+    border-color: #b9d3bd;
+}
+
+.home-header .menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.home-header .menu-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: #285b3c;
+}
+
+@media (max-width: 700px) {
+    .home-header {
+        min-height: 70px;
+        gap: 12px;
+        padding: 0 18px;
+    }
+
+    .home-header .home-brand {
+        font-size: 22px;
+    }
+
+    .home-header .home-brand-icon {
+        font-size: 27px;
+    }
+
+    .home-header .menu-toggle {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    .home-header .home-nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 20px 14px;
+        border-bottom: 1px solid #e5ece5;
+        background: #fff;
+        box-shadow: 0 10px 18px rgba(25, 61, 37, .07);
+    }
+
+    .home-header .home-nav.open {
+        display: flex;
+    }
+
+    .home-header .home-nav a {
+        padding: 12px 4px;
+    }
+
+    .home-header .home-cart {
+        min-height: 38px;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 390px) {
+    .home-header {
+        gap: 6px;
+        padding: 0 12px;
+    }
+
+    .home-header .home-brand {
+        gap: 5px;
+        font-size: 19px;
+    }
+
+    .home-header .home-cart {
+        gap: 5px;
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+}
