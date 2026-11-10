@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174d36">
+    <meta name="description" content="Explore os produtos da BioStore.">
+    <title>Produtos | BioStore</title>
+    <link rel="stylesheet" href="../pages-style.css">
+    <script src="products.js" defer></script>
+</head>
+<body class="products-page">
+    <header class="home-header">
+        <a class="home-brand" href="../home/home.html" aria-label="BioStore - página inicial">
+            <span class="home-brand-icon" aria-hidden="true">🌿</span>
+            <span>Bio<span>Store</span></span>
+        </a>
+        <nav class="home-nav" aria-label="Navegação principal">
+            <a href="../home/home.html">Início</a>
+            <a class="active" href="products.html">Produtos</a>
+            <a href="../home/home.html#sobre">Sobre nós</a>
+        </nav>
+        <a class="home-cart" href="../cart/cart.html">🛒 <span>Meu carrinho</span></a>
+    </header>
+
+    <main class="products-main">
+        <section class="products-intro">
+            <span class="home-section-eyebrow">CATÁLOGO BIOSTORE</span>
+            <h1>Explore nossos produtos.</h1>
+            <p>Ciência, natureza e conhecimento para despertar sua curiosidade.</p>
+        </section>
+
+        <section class="products-tools" aria-label="Pesquisa e filtros de produtos">
+            <form class="products-search" id="productsSearchForm" role="search">
+                <span aria-hidden="true">⌕</span>
+                <input type="search" id="productsSearchInput" placeholder="O que você está procurando?" aria-label="Buscar produtos">
+                <button type="submit">Pesquisar</button>
+            </form>
+            <div class="products-filters">
+                <label for="categoryFilter">Categoria</label>
+                <select id="categoryFilter">
+                    <option value="todas">Todas as categorias</option>
+                    <option value="terrarios">Terrários</option>
+                    <option value="materiais">Materiais de Biologia</option>
+                    <option value="culturas">Culturas</option>
+                    <option value="educacao">Conteúdo educativo</option>
+                </select>
+                <label for="sortFilter">Ordenar</label>
+                <select id="sortFilter">
+                    <option value="featured">Destaques</option>
+                    <option value="name">Nome (A–Z)</option>
+                    <option value="price-asc">Menor preço</option>
+                    <option value="price-desc">Maior preço</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="products-results">
+            <div class="products-results-heading">
+                <h2>Todos os produtos</h2>
+                <span id="productsCount" aria-live="polite">0 produtos</span>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <div class="products-no-results" id="productsNoResults" hidden>
+                <span aria-hidden="true">🔎</span>
+                <h2>Nenhum produto encontrado</h2>
+                <p>Tente buscar por outro nome ou selecionar uma categoria diferente.</p>
+                <button id="clearFiltersButton" type="button">Limpar filtros</button>
+            </div>
+        </section>
+    </main>
+
+    <a class="floating-cart-button" href="../cart/cart.html" aria-label="Abrir carrinho">
+        <span class="floating-cart-icon" aria-hidden="true">🛒</span>
+        <span class="floating-cart-count" id="cartCount" aria-live="polite">0</span>
+    </a>
+</body>
+</html>
