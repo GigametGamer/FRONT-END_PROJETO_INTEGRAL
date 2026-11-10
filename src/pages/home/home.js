@@ -86,3 +86,16 @@ if (categoryTrack && categoryPrev && categoryNext) {
     window.addEventListener("resize", atualizarCarrosselCategorias);
     atualizarCarrosselCategorias();
 }
+
+
+// Pesquisa da Home: envia o termo para a página de catálogo.
+const homeSearchForm = document.querySelector("#homeSearchForm");
+const homeSearchInput = document.querySelector("#homeSearchInput");
+
+if (homeSearchForm && homeSearchInput) {
+    homeSearchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const termo = homeSearchInput.value.trim();
+        window.location.href = "../products/products.html?q=" + encodeURIComponent(termo);
+    });
+}
