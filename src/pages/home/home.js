@@ -44,3 +44,45 @@ function atualizarContadorCarrinho() {
 atualizarContadorCarrinho();
 window.addEventListener("storage", atualizarContadorCarrinho);
 window.addEventListener("carrinhoAtualizado", atualizarContadorCarrinho);
+
+
+// Carrossel de categorias: mostra três cards por vez em telas grandes.
+const categoryTrack = document.querySelector("#categoryTrack");
+const categoryPrev = document.querySelector("#categoryPrev");
+const categoryNext = document.querySelector("#categoryNext");
+
+if (categoryTrack && categoryPrev && categoryNext) {
+    const categoryCards = Array.from(categoryTrack.querySelectorAll(".home-category-card"));
+    let categoryIndex = 0;
+
+    function quantidadeVisivelCategorias() {
+        if (window.innerWidth <= 600) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
+    }
+
+    function atualizarCarrosselCategorias() {
+        const maxIndex = Math.max(0, categoryCards.length - quantidadeVisivelCategorias());
+        categoryIndex = Math.min(categoryIndex, maxIndex);
+
+        const deslocamento = categoryCards[categoryIndex]?.offsetLeft || 0;
+        categoryTrack.style.transform = `translateX(-${deslocamento}px)`;
+
+        categoryPrev.disabled = categoryIndex === 0;
+        categoryNext.disabled = categoryIndex >= maxIndex;
+    }
+
+    categoryPrev.addEventListener("click", () => {
+        categoryIndex = Math.max(0, categoryIndex - 1);
+        atualizarCarrosselCategorias();
+    });
+
+    categoryNext.addEventListener("click", () => {
+        const maxIndex = Math.max(0, categoryCards.length - quantidadeVisivelCategorias());
+        categoryIndex = Math.min(maxIndex, categoryIndex + 1);
+        atualizarCarrosselCategorias();
+    });
+
+    window.addEventListener("resize", atualizarCarrosselCategorias);
+    atualizarCarrosselCategorias();
+}
