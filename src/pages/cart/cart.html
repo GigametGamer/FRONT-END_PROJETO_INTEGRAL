@@ -1,11 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela inicial</title>
+    <meta name="theme-color" content="#174d36">
+    <title>Meu carrinho | BioStore</title>
+    <link rel="stylesheet" href="../pages-style.css">
+    <script src="cart.js" defer></script>
 </head>
-<body>
-    <header>
-        <h1>Carrinho de Compras</h1>
+<body class="cart-page">
+    <header class="home-header">
+        <a class="home-brand" href="../home/home.html"><span class="home-brand-icon" aria-hidden="true">🌿</span><span>Bio<span>Store</span></span></a>
+        <nav class="home-nav cart-nav" aria-label="Navegação principal">
+            <a href="../home/home.html">Início</a>
+            <a href="../home/home.html#categorias">Categorias</a>
+        </nav>
+        <a class="home-cart" href="../home/home.html#categorias">Continuar comprando <span aria-hidden="true">→</span></a>
     </header>
+    <main class="cart-main">
+        <div class="cart-heading">
+            <span class="home-section-eyebrow">SUA SELEÇÃO</span>
+            <h1>Meu carrinho</h1>
+            <p>Confira seus produtos antes de continuar.</p>
+        </div>
+        <div class="cart-layout">
+            <section class="cart-items-panel" aria-label="Produtos no carrinho">
+                <div class="cart-items-heading"><h2>Itens adicionados</h2><span id="cartItemsCount">0 itens</span></div>
+                <div id="cartItems" class="cart-items" aria-live="polite"></div>
+                <div class="cart-empty" id="cartEmpty">
+                    <span aria-hidden="true">🛒</span>
+                    <h2>Seu carrinho está vazio</h2>
+                    <p>Explore as categorias e encontre algo interessante para adicionar.</p>
+                    <a class="cart-continue-button" href="../home/home.html#categorias">Explorar categorias</a>
+                </div>
+            </section>
+            <aside class="cart-summary" aria-label="Resumo do pedido">
+                <h2>Resumo do pedido</h2>
+                <div class="cart-summary-line"><span>Subtotal</span><strong id="cartSubtotal">R$ 0,00</strong></div>
+                <div class="cart-summary-line"><span>Entrega</span><strong>A calcular</strong></div>
+                <div class="cart-summary-total"><span>Total parcial</span><strong id="cartTotal">R$ 0,00</strong></div>
+                <button class="cart-checkout-button" id="checkoutButton" type="button" disabled>Finalizar compra</button>
+                <p class="cart-checkout-note" id="checkoutMessage" role="status">A finalização será liberada quando o pagamento estiver integrado.</p>
+                <button class="cart-clear-button" id="clearCartButton" type="button" disabled>Limpar carrinho</button>
+            </aside>
+        </div>
+    </main>
+    <footer class="cart-footer">
+        <a class="home-brand footer-brand" href="../home/home.html"><span class="home-brand-icon" aria-hidden="true">🌿</span><span>Bio<span>Store</span></span></a>
+        <p>© 2026 BioStore • Conhecimento que floresce.</p>
+    </footer>
+</body>
+</html>
