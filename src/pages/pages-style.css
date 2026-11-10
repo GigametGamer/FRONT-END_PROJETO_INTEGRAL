@@ -443,7 +443,7 @@ body {
     justify-content: space-between;
     min-height: 78px;
     padding: 0 clamp(22px, 7vw, 108px);
-    background: #fff;
+    background: #ffffff;
     border-bottom: 1px solid #e8efe8;
 }
 
