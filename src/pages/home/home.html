@@ -1,17 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial</title>
+    <meta name="description" content="BioStore: materiais de biologia, terrários e culturas para aprender e explorar a natureza.">
+    <title>BioStore | Conhecimento que floresce</title>
     <link rel="stylesheet" href="../pages-style.css">
+    <script src="home.js" defer></script>
 </head>
-<body>
-    <header>
-        <h1>Bem-vindo à Nossa Loja</h1>
+<body class="home-page">
+    <header class="home-header">
+        <a class="home-brand" href="home.html" aria-label="BioStore - página inicial">
+            <span class="home-brand-icon" aria-hidden="true">✿</span>
+            <span>Bio<span>Store</span></span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+
+        <nav class="home-nav" id="homeNav" aria-label="Navegação principal">
+            <a class="active" href="#inicio">Início</a>
+            <a href="#categorias">Categorias</a>
+            <a href="#sobre">Sobre nós</a>
+        </nav>
+
+        <a class="home-cart" href="#categorias" aria-label="Explorar produtos">
+            <span aria-hidden="true">🛒</span>
+            <span>Explorar</span>
+        </a>
     </header>
+
     <main>
-        <h1>Produtos em Destaque</h1>
+        <section class="home-hero" id="inicio">
+            <div class="hero-content">
+                <span class="hero-eyebrow">BIOLOGIA • NATUREZA • DESCOBERTA</span>
+                <h1>Cultive conhecimento.<br><span>Explore a natureza.</span></h1>
+                <p>Encontre materiais de biologia, terrários e culturas para transformar a curiosidade em experiências e aprendizado.</p>
+                <a class="hero-button" href="#categorias">Conheça nossos produtos <span aria-hidden="true">→</span></a>
+                <div class="hero-note"><span aria-hidden="true">✦</span> Aprender também é colocar a mão na natureza.</div>
+            </div>
+            <div class="hero-visual" role="img" aria-label="Terrário de vidro com plantas, musgos e pequenas folhas">
+                <div class="hero-visual-label"><span>🌱</span><span>Um mundo de descobertas</span></div>
+            </div>
+            <div class="hero-decoration" aria-hidden="true">✳</div>
+        </section>
+
+        <section class="home-categories section-wrap" id="categorias">
+            <div class="section-heading">
+                <div>
+                    <span class="section-eyebrow">EXPLORE A BIOSTORE</span>
+                    <h2>O que você está procurando?</h2>
+                    <p>Escolha uma categoria e descubra novas possibilidades.</p>
+                </div>
+                <label class="category-search">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="categorySearch" type="search" placeholder="Buscar categoria..." aria-label="Buscar categoria">
+                </label>
+            </div>
+
+            <div class="category-grid" id="categoryGrid">
+                <a class="category-card" href="#sobre" data-category="terrários terrario plantas">
+                    <div class="category-image terrarium-image" role="img" aria-label="Terrário com plantas e musgos"><span>🌿</span></div>
+                    <div class="category-card-info"><div><h3>Terrários</h3><p>Pequenos ecossistemas</p></div><span class="category-arrow">↗</span></div>
+                </a>
+                <a class="category-card" href="#sobre" data-category="materiais biologia estudo pesquisa">
+                    <div class="category-image materials-image" role="img" aria-label="Materiais de estudo de biologia"><span>🔬</span></div>
+                    <div class="category-card-info"><div><h3>Materiais</h3><p>Estudo e experimentação</p></div><span class="category-arrow">↗</span></div>
+                </a>
+                <a class="category-card" href="#sobre" data-category="culturas laboratório microbiologia">
+                    <div class="category-image cultures-image" role="img" aria-label="Materiais de laboratório"><span>🧫</span></div>
+                    <div class="category-card-info"><div><h3>Culturas</h3><p>Conheça o mundo microscópico</p></div><span class="category-arrow">↗</span></div>
+                </a>
+                <a class="category-card" href="#sobre" data-category="educação livros conhecimento">
+                    <div class="category-image education-image" role="img" aria-label="Livros e materiais de educação"><span>📚</span></div>
+                    <div class="category-card-info"><div><h3>Educação</h3><p>Conhecimento para crescer</p></div><span class="category-arrow">↗</span></div>
+                </a>
+            </div>
+            <p class="no-category-results" id="noCategoryResults" hidden>Nenhuma categoria encontrada. Tente outra busca.</p>
+        </section>
+
+        <section class="home-about" id="sobre">
+            <div class="about-illustration" aria-hidden="true"><span>🌱</span><span>✦</span><span>🍃</span></div>
+            <div class="about-content">
+                <span class="section-eyebrow">NOSSA IDEIA</span>
+                <h2>Aprender sobre a vida pode ser uma experiência incrível.</h2>
+                <p>A BioStore aproxima a biologia do dia a dia. Nossa proposta é reunir recursos que despertem a curiosidade, incentivem a observação e tornem o aprendizado mais interessante.</p>
+                <div class="about-features">
+                    <div><span>♧</span><p><strong>Conexão com a natureza</strong><small>Descubra o mundo ao seu redor.</small></p></div>
+                    <div><span>✧</span><p><strong>Aprendizado na prática</strong><small>Transforme teoria em descoberta.</small></p></div>
+                    <div><span>⌘</span><p><strong>Curiosidade sem limites</strong><small>Sempre existe algo novo para explorar.</small></p></div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="home-footer">
+        <a class="home-brand footer-brand" href="#inicio"><span class="home-brand-icon" aria-hidden="true">✿</span><span>Bio<span>Store</span></span></a>
+        <p>Conhecimento que floresce.</p>
+        <span class="footer-copy">© 2026 BioStore. Projeto educacional.</span>
+    </footer>
 </body>
 </html>
