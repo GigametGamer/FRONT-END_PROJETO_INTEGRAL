@@ -1143,3 +1143,60 @@ body {
     .home-about { padding: 52px 23px; }
 }
 @media (max-width: 360px) { .home-category-grid { grid-template-columns: 1fr; } }
+
+
+/* Botão flutuante do carrinho */
+.floating-cart-button {
+    position: fixed;
+    z-index: 1000;
+    right: 28px;
+    bottom: 28px;
+    display: grid;
+    place-items: center;
+    width: 62px;
+    height: 62px;
+    border: 0;
+    border-radius: 50%;
+    background: #205b3b;
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 7px 22px rgba(22, 65, 39, .28);
+    transition: transform .2s, background .2s;
+}
+
+.floating-cart-button:hover {
+    transform: translateY(-4px);
+    background: #17472e;
+}
+
+.floating-cart-icon {
+    font-size: 25px;
+    line-height: 1;
+}
+
+.floating-cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: grid;
+    place-items: center;
+    min-width: 25px;
+    height: 25px;
+    padding: 0 6px;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    background: #e53935;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .floating-cart-button {
+        right: 18px;
+        bottom: 18px;
+        width: 56px;
+        height: 56px;
+    }
+}
