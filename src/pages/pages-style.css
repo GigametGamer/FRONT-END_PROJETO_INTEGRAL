@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
 body{
     background-color: aliceblue;
     padding: 0;
@@ -56,7 +58,7 @@ body{
 
 /* Estilos compartilhados das páginas de login e cadastro da BioStore */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
 
 :root {
     --green-dark: #174d36;
