@@ -9,3 +9,19 @@ export function inteiroPositivo(valor) {
         && Number.isSafeInteger(valor)
         && valor > 0;
 }
+
+export function numeroNaoNegativo(valor) {
+    return typeof valor === "number"
+        && Number.isFinite(valor)
+        && valor >= 0;
+}
+
+export function emailValido(valor) {
+    return typeof valor === "string"
+        && valor.length <= 254
+        && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+}
+
+export function dataValida(valor) {
+    return valor == null || valor === "" || !Number.isNaN(Date.parse(valor));
+}
