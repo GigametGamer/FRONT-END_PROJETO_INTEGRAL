@@ -11,10 +11,10 @@ const semResultados = document.querySelector("#productsNoResults");
 const limparFiltros = document.querySelector("#clearFiltersButton");
 
 const categoriasSlug = {
-    "terrários": "terrarios",
+    "terrarios": "terrarios",
     "materiais de biologia": "materiais",
     "culturas": "culturas",
-    "conteúdo educativo": "educacao"
+    "conteudo educativo": "educacao"
 };
 
 const iconesCategoria = {
