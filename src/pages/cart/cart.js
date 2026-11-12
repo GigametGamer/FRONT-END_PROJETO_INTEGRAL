@@ -1,4 +1,6 @@
+const API_URL = "http://localhost:3000";
 const CHAVE_CARRINHO = "biostoreCart";
+const CHAVE_USUARIO = "biostoreUsuario";
 const listaCarrinho = document.querySelector("#cartItems");
 const estadoVazio = document.querySelector("#cartEmpty");
 const contadorItens = document.querySelector("#cartItemsCount");
@@ -55,6 +57,9 @@ function renderizarCarrinho() {
     totalElemento.textContent = moeda(subtotal);
     botaoLimpar.disabled = itens.length === 0;
     botaoFinalizar.disabled = itens.length === 0;
+    mensagemFinalizar.textContent = itens.length
+        ? "Entre na sua conta para registrar o pedido. O pagamento ainda não está integrado."
+        : "Adicione produtos para montar seu pedido.";
 
     itens.forEach((item) => {
         const linha = elemento("article", "cart-item");
@@ -114,8 +119,75 @@ botaoLimpar.addEventListener("click", () => {
     renderizarCarrinho();
 });
 
-botaoFinalizar.addEventListener("click", () => {
-    mensagemFinalizar.textContent = "O carrinho está pronto, mas a etapa de pagamento ainda não foi integrada.";
+botaoFinalizar.addEventListener("click", async () => {
+    mensagemFinalizar.textContent = "";
+    let usuario;
+
+    try {
+        usuario = JSON.parse(localStorage.getItem(CHAVE_USUARIO));
+    } catch {
+        usuario = null;
+    }
+
+    if (!usuario?.id) {
+        mensagemFinalizar.textContent = "Você precisa entrar na sua conta antes de finalizar o pedido.";
+        window.location.href = "../login/login.html?redirect=cart";
+        return;
+    }
+
+    const itens = lerCarrinho();
+    if (!itens.length) return;
+
+    const valorTotal = itens.reduce((total, item) => total + item.preco * item.quantidade, 0);
+    const textoOriginal = botaoFinalizar.textContent;
+    botaoFinalizar.disabled = true;
+    botaoFinalizar.textContent = "Registrando pedido...";
+
+    try {
+        const respostaPedido = await fetch(`${API_URL}/pedido`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                usuario_id: Number(usuario.id),
+                status: "Pendente",
+                valor_total: Number(valorTotal.toFixed(2))
+            })
+        });
+
+        const dadosPedido = await respostaPedido.json().catch(() => ({}));
+        if (!respostaPedido.ok || !dadosPedido.id) {
+            throw new Error(dadosPedido.erro || "Não foi possível registrar o pedido.");
+        }
+
+        for (const item of itens) {
+            const respostaItem = await fetch(`${API_URL}/itensPedido`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    pedido_id: Number(dadosPedido.id),
+                    produto_id: Number(item.id),
+                    quantidade: Number(item.quantidade),
+                    preco_unitario: Number(item.preco)
+                })
+            });
+
+            const dadosItem = await respostaItem.json().catch(() => ({}));
+            if (!respostaItem.ok) {
+                throw new Error(dadosItem.erro || `O pedido ${dadosPedido.id} foi criado, mas um item não pôde ser registrado. Entre em contato com a equipe da BioStore.`);
+            }
+        }
+
+        salvarCarrinho([]);
+        renderizarCarrinho();
+        mensagemFinalizar.textContent = `Pedido #${dadosPedido.id} registrado com sucesso! Ele está pendente. O pagamento ainda precisa ser combinado/integrado.`;
+    } catch (erro) {
+        mensagemFinalizar.textContent = erro.message.includes("Failed to fetch")
+            ? "Não foi possível conectar à API. Confira se o backend está ligado."
+            : erro.message;
+    } finally {
+        botaoFinalizar.disabled = lerCarrinho().length === 0;
+        botaoFinalizar.textContent = textoOriginal;
+    }
 });
 
 window.addEventListener("storage", renderizarCarrinho);
