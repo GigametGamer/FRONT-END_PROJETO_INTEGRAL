@@ -1,13 +1,12 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "API da BioStore",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "keywords": [],
   "author": "Brenda Andrade, Giovanni Medeiros e Renan Morato",
   "license": "ISC",
   "type": "module",

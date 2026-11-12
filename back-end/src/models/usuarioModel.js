@@ -1,21 +1,22 @@
 import conexao from "../../config/db.js";
+
 export function listar(callback) {
-    const sql = "SELECT * FROM usuarios ORDER BY id";
-    conexao.query(sql, callback);
-};
+  conexao.query("SELECT id, nome, email, telefone, data_cadastro FROM usuarios ORDER BY id", callback);
+}
+
 export function buscarPorId(id, callback) {
-    const sql = "SELECT * FROM usuarios WHERE id = ?";
-    conexao.query(sql, [id], callback);
-};
+  conexao.query("SELECT id, nome, email, telefone, data_cadastro FROM usuarios WHERE id = ?", [id], callback);
+}
+
+export function buscarPorEmail(email, callback) {
+  conexao.query("SELECT id, nome, email, senha FROM usuarios WHERE email = ? LIMIT 1", [email], callback);
+}
+
 export function criar(dados, callback) {
-    const sql = "INSERT INTO usuarios (nome, email, senha, telefone, data_cadastro) VALUES (?, ?, ?, ?, ?)";
-    conexao.query(sql, [dados.nome, dados.email, dados.senha, dados.telefone, dados.data_cadastro], callback);
-};
-export function atualizar(id, dados, callback) {
-    const sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, telefone = ?, data_cadastro = ?, WHERE id = ?";
-    conexao.query(sql, [dados.nome, dados.email, dados.senha, dados.telefone, dados.data_cadastro, id], callback);
-};
+  const sql = "INSERT INTO usuarios (nome, email, senha, telefone) VALUES (?, ?, ?, ?)";
+  conexao.query(sql, [dados.nome, dados.email, dados.senha, dados.telefone || null], callback);
+}
+
 export function excluir(id, callback) {
-    const sql = "DELETE FROM usuarios WHERE id = ?";
-    conexao.query(sql, [id], callback);
-};
+  conexao.query("DELETE FROM usuarios WHERE id = ?", [id], callback);
+}
