@@ -1,0 +1,21 @@
+info:
+  name: post_categorias
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:3000/categorias
+  body:
+    type: json
+    data: |-
+      {
+        "nome":"Categoria 1",
+        "descricao":"Teste categoria"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
