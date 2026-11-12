@@ -1,59 +1,5 @@
-const produtos = [
-    {
-        id: "terrario-mini",
-        nome: "Terrário Mini",
-        categoria: "terrarios",
-        descricao: "Um pequeno ecossistema decorativo para observar a natureza.",
-        preco: 59.90,
-        icone: "🪴",
-        destaque: true
-    },
-    {
-        id: "terrario-vidro",
-        nome: "Terrário de Vidro",
-        categoria: "terrarios",
-        descricao: "Recipiente de vidro para montar seu próprio terrário.",
-        preco: 89.90,
-        icone: "🌱",
-        destaque: true
-    },
-    {
-        id: "lupa-escolar",
-        nome: "Lupa de Observação",
-        categoria: "materiais",
-        descricao: "Apoio para observar detalhes de folhas, rochas e outros objetos.",
-        preco: 24.90,
-        icone: "🔎",
-        destaque: true
-    },
-    {
-        id: "kit-biologia",
-        nome: "Kit de Estudos de Biologia",
-        categoria: "materiais",
-        descricao: "Materiais didáticos para acompanhar atividades de biologia.",
-        preco: 74.90,
-        icone: "🔬",
-        destaque: false
-    },
-    {
-        id: "caderno-ciencias",
-        nome: "Caderno de Ciências",
-        categoria: "educacao",
-        descricao: "Caderno para anotações, observações e estudos.",
-        preco: 29.90,
-        icone: "📓",
-        destaque: false
-    },
-    {
-        id: "guia-natureza",
-        nome: "Guia Ilustrado da Natureza",
-        categoria: "educacao",
-        descricao: "Material educativo para conhecer melhor o mundo natural.",
-        preco: 39.90,
-        icone: "📚",
-        destaque: true
-    }
-];
+const API_URL = "http://localhost:3000";
+let produtos = [];
 
 const gradeProdutos = document.querySelector("#productsGrid");
 const campoBusca = document.querySelector("#productsSearchInput");
@@ -64,12 +10,26 @@ const contadorProdutos = document.querySelector("#productsCount");
 const semResultados = document.querySelector("#productsNoResults");
 const limparFiltros = document.querySelector("#clearFiltersButton");
 
+const categoriasSlug = {
+    "terrários": "terrarios",
+    "materiais de biologia": "materiais",
+    "culturas": "culturas",
+    "conteúdo educativo": "educacao"
+};
+
+const iconesCategoria = {
+    terrarios: "🪴",
+    materiais: "🔬",
+    culturas: "🧫",
+    educacao: "📚"
+};
+
 function formatarMoeda(valor) {
-    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    return Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 function normalizarTexto(texto) {
-    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return String(texto ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 function lerCarrinho() {
@@ -80,12 +40,6 @@ function lerCarrinho() {
     } catch {
         return [];
     }
-}
-
-function atualizarCarrinho(itens) {
-    localStorage.setItem("biostoreCart", JSON.stringify(itens));
-    window.dispatchEvent(new Event("carrinhoAtualizado"));
-    atualizarContadorCarrinho();
 }
 
 function atualizarContadorCarrinho() {
@@ -99,7 +53,7 @@ function atualizarContadorCarrinho() {
 
 function adicionarAoCarrinho(produto) {
     const itens = lerCarrinho();
-    const existente = itens.find(item => String(item.id ?? item.productId) === produto.id);
+    const existente = itens.find(item => Number(item.id ?? item.productId) === Number(produto.id));
 
     if (existente) {
         existente.quantidade = Number(existente.quantidade ?? existente.quantity ?? 1) + 1;
@@ -107,13 +61,16 @@ function adicionarAoCarrinho(produto) {
         itens.push({
             id: produto.id,
             nome: produto.nome,
-            preco: produto.preco,
+            preco: Number(produto.preco),
             quantidade: 1,
             imagem: ""
         });
     }
 
-    atualizarCarrinho(itens);
+    localStorage.setItem("biostoreCart", JSON.stringify(itens));
+    window.dispatchEvent(new Event("carrinhoAtualizado"));
+    atualizarContadorCarrinho();
+
     const botao = gradeProdutos.querySelector('[data-add="' + produto.id + '"]');
     if (botao) {
         botao.textContent = "Adicionado ✓";
@@ -128,23 +85,18 @@ function criarCard(produto) {
     const imagem = document.createElement("div");
     imagem.className = "product-card-image";
     imagem.setAttribute("aria-hidden", "true");
-    imagem.textContent = produto.icone;
+    imagem.textContent = iconesCategoria[produto.categoria] || "🌿";
 
     const categoria = document.createElement("span");
     categoria.className = "product-card-category";
-    categoria.textContent = {
-        terrarios: "Terrários",
-        materiais: "Materiais de Biologia",
-        culturas: "Culturas",
-        educacao: "Conteúdo educativo"
-    }[produto.categoria];
+    categoria.textContent = produto.categoriaNome;
 
     const nome = document.createElement("h3");
     nome.textContent = produto.nome;
 
     const descricao = document.createElement("p");
     descricao.className = "product-card-description";
-    descricao.textContent = produto.descricao;
+    descricao.textContent = produto.descricao || "Produto BioStore.";
 
     const rodape = document.createElement("div");
     rodape.className = "product-card-footer";
@@ -157,6 +109,8 @@ function criarCard(produto) {
     botao.className = "product-add-button";
     botao.dataset.add = produto.id;
     botao.textContent = "Adicionar ao carrinho";
+    botao.disabled = Number(produto.estoque) <= 0;
+    if (botao.disabled) botao.textContent = "Sem estoque";
     botao.addEventListener("click", () => adicionarAoCarrinho(produto));
 
     rodape.append(preco, botao);
@@ -167,28 +121,57 @@ function criarCard(produto) {
 function renderizarProdutos() {
     const termo = normalizarTexto(campoBusca.value.trim());
     const categoria = filtroCategoria.value;
+
     let filtrados = produtos.filter(produto => {
-        const correspondeBusca = normalizarTexto(
-            produto.nome + " " + produto.descricao + " " + produto.categoria
-        ).includes(termo);
-        const correspondeCategoria = categoria === "todas" || produto.categoria === categoria;
-        return correspondeBusca && correspondeCategoria;
+        const texto = normalizarTexto(produto.nome + " " + produto.descricao + " " + produto.categoriaNome);
+        return texto.includes(termo) && (categoria === "todas" || produto.categoria === categoria);
     });
 
     if (filtroOrdem.value === "name") {
         filtrados.sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"));
     } else if (filtroOrdem.value === "price-asc") {
-        filtrados.sort((a, b) => a.preco - b.preco);
+        filtrados.sort((a, b) => Number(a.preco) - Number(b.preco));
     } else if (filtroOrdem.value === "price-desc") {
-        filtrados.sort((a, b) => b.preco - a.preco);
-    } else {
-        filtrados.sort((a, b) => Number(b.destaque) - Number(a.destaque));
+        filtrados.sort((a, b) => Number(b.preco) - Number(a.preco));
     }
 
     gradeProdutos.replaceChildren(...filtrados.map(criarCard));
     contadorProdutos.textContent = filtrados.length + (filtrados.length === 1 ? " produto" : " produtos");
     semResultados.hidden = filtrados.length > 0;
     gradeProdutos.hidden = filtrados.length === 0;
+}
+
+async function carregarProdutos() {
+    gradeProdutos.innerHTML = "<p>Carregando produtos...</p>";
+    try {
+        const resposta = await fetch(`${API_URL}/produto`);
+        if (!resposta.ok) throw new Error("A API não conseguiu carregar os produtos.");
+        const dados = await resposta.json();
+
+        produtos = dados.map(item => {
+            const categoriaNome = item.categoria || "Outros";
+            const categoria = categoriasSlug[normalizarTexto(categoriaNome)] || "outros";
+            return {
+                id: Number(item.id),
+                nome: item.nome,
+                descricao: item.descricao,
+                preco: Number(item.preco),
+                estoque: Number(item.estoque),
+                categoria,
+                categoriaNome
+            };
+        });
+
+        renderizarProdutos();
+    } catch (erro) {
+        gradeProdutos.replaceChildren();
+        semResultados.hidden = false;
+        semResultados.querySelector("h2").textContent = "Não foi possível carregar os produtos";
+        semResultados.querySelector("p").textContent = erro.message.includes("Failed to fetch")
+            ? "Confira se o MariaDB e o backend estão ligados."
+            : erro.message;
+        contadorProdutos.textContent = "0 produtos";
+    }
 }
 
 formularioBusca.addEventListener("submit", event => {
@@ -214,6 +197,6 @@ if (["terrarios", "materiais", "culturas", "educacao"].includes(categoriaInicial
 }
 
 atualizarContadorCarrinho();
-renderizarProdutos();
+carregarProdutos();
 window.addEventListener("storage", atualizarContadorCarrinho);
 window.addEventListener("carrinhoAtualizado", atualizarContadorCarrinho);
