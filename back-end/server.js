@@ -14,20 +14,24 @@ import usuarioRoute from "./src/routes/usuarioRoute.js";
 
 const app = express();
 const PORTA = Number(process.env.PORT || process.env.PORTA || 3000);
-
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
-
 app.get("/", (req, res) => res.status(200).json({ mensagem: "BioStore API está online." }));
 
 app.use("/categorias", categoriaRoute);
 app.use("/enderecos", enderecoRoute);
+app.use("/endereco", enderecoRoute);
 app.use("/fornecedores", fornecedorRoute);
+app.use("/fornecedor", fornecedorRoute);
 app.use("/itensPedido", itemPedidoRoute);
 app.use("/pagamentos", pagamentoRoute);
+app.use("/pagamento", pagamentoRoute);
 app.use("/pedidos", pedidoRoute);
+app.use("/pedido", pedidoRoute);
 app.use("/produtos", produtoRoute);
+app.use("/produto", produtoRoute);
 app.use("/usuarios", usuarioRoute);
+app.use("/usuario", usuarioRoute);
 
 app.use((req, res) => res.status(404).json({ erro: "Rota não encontrada." }));
 app.use(tratarErro);
@@ -37,12 +41,8 @@ conexao.connect((erro) => {
         console.error("Não foi possível conectar ao banco:", erro.code || erro.message);
         process.exit(1);
     }
-
     console.log("Conectado ao banco BioStore.");
-    const servidor = app.listen(PORTA, () => {
-        console.log(`Servidor iniciado em http://localhost:${PORTA}`);
-    });
-
+    const servidor = app.listen(PORTA, () => console.log(`Servidor iniciado em http://localhost:${PORTA}`));
     servidor.on("error", (erroServidor) => {
         console.error("Erro ao iniciar servidor:", erroServidor.message);
         conexao.end(() => process.exit(1));
